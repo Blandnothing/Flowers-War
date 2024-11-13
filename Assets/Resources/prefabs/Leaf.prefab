@@ -100,6 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isRemove: 0
   isCenter: 0
+  pieceObj: {fileID: 3800698268712992776}
 --- !u!65 &-4895712230702513756
 BoxCollider:
   m_ObjectHideFlags: 0
