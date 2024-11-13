@@ -14,7 +14,7 @@ public class NewBehaviourScript : MonoBehaviour
     // Update is called once per frame
     public void BackMain()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("MainMenu");
 
     }
 }
