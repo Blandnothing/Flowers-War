@@ -54,6 +54,7 @@ public class BoardBehavior : MonoBehaviour
                 CellBehaviors[i * 8 + n].index = i * 8 + n;
             }
         }
+        CellBehaviors.Add(null);
 
     }
 
@@ -64,16 +65,12 @@ public class BoardBehavior : MonoBehaviour
     }
 
     void InspectPiecesRow() {
-        for (int r = 0; r < 8; r++)
-        {
+    int r = 0;
             for (int c = 1; c < 7; c++)
             {
-
                 current = r * 8 + c;
                 if (CellBehaviors[current].thisScript != null)
                 {
-                    // if ( c > 0) { last = current - 1; }
-                    // if ( c < 7) { next = current + 1; }
                     last = current - 1;
                     next = current + 1;
                     if (CellBehaviors[last]?.thisScript?.mpiecesCamp == CellBehaviors[current].thisScript.mpiecesCamp && CellBehaviors[next]?.thisScript?.mpiecesCamp == CellBehaviors[current].thisScript.mpiecesCamp) {
@@ -81,15 +78,31 @@ public class BoardBehavior : MonoBehaviour
                         CellBehaviors[current].thisScript.isRemove = (CellBehaviors[current].thisScript.isCenter != true);
                         CellBehaviors[next].thisScript.isRemove = (CellBehaviors[next].thisScript.isCenter != true);
                     }
-
+                }
+            }
+        r = 1;
+            for (int c = 1; c < 7; c++)
+        {
+            current = r * 8 + c;
+            if (CellBehaviors[current].thisScript != null)
+            {
+                last = current - 1;
+                next = current + 1;
+                if (CellBehaviors[last]?.thisScript?.mpiecesCamp == CellBehaviors[current].thisScript.mpiecesCamp && CellBehaviors[next]?.thisScript?.mpiecesCamp == CellBehaviors[current].thisScript.mpiecesCamp)
+                {
+                    CellBehaviors[last].thisScript.isRemove = (CellBehaviors[last].thisScript.isCenter != true);
+                    CellBehaviors[current].thisScript.isRemove = (CellBehaviors[current].thisScript.isCenter != true);
+                    CellBehaviors[next].thisScript.isRemove = (CellBehaviors[next].thisScript.isCenter != true);
                 }
             }
         }
+            
+
         current = 0;
     }
     void InspectPiecesCol()
     {
-        for (int c = 1; c < 7; c++) {
+        for (int c = 0; c < 8; c++) {
             for (int r = 0; r < 8; r++) {
                 current = r * 8 + c;
                 if (CellBehaviors[current].thisScript != null)
@@ -97,8 +110,9 @@ public class BoardBehavior : MonoBehaviour
                     //if ( r > 0) { last = current - 1; }
                     //if ( r < 7) { next = current + 1; }
                     last = current - 8;
-                    if (last < 0) { last = 63; }//临时处理一下下标超过列表范围
+                    if (last < 0) { last = 64; }//处理下标超过列表范围
                     next = current + 8;
+                    if (next > 63) { next = 64; }
                     if (CellBehaviors[last]?.thisScript?.mpiecesCamp == CellBehaviors[current].thisScript.mpiecesCamp && CellBehaviors[next]?.thisScript?.mpiecesCamp == CellBehaviors[current].thisScript.mpiecesCamp)
                     {
                         CellBehaviors[last].thisScript.isRemove = (CellBehaviors[last].thisScript.isCenter != true);
@@ -115,6 +129,10 @@ public class BoardBehavior : MonoBehaviour
     void ClearCell() {
         foreach (CellBehavior cell in CellBehaviors) {
             cell?.thisScript?.piecesRemove();
+            if (cell?.thisScript?.isRemove == true) { 
+            cell.thisScript = null;
+            cell.thisPieces = null;
+            }
         }
     }
      
