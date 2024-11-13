@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2030448168666625268}
   - component: {fileID: 173761117786824600}
+  - component: {fileID: -709113349981173418}
   m_Layer: 0
   m_Name: StemB
   m_TagString: Untagged
@@ -84,3 +85,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-709113349981173418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8263717036225228531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28166667d82b8514f98be9d7b9bfb783, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isRemove: 0
+  isCenter: 0
+  pieceObj: {fileID: 8263717036225228531}
