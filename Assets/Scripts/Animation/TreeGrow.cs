@@ -47,14 +47,14 @@ public class TreeGrow : MonoBehaviour
     void Update()
     {
         //因目前没有相关逻辑判断，故先使用空格和E去判断
-        if (Input.GetKeyUp(KeyCode.K))
-        {
-            SetTreeGrowing(true);
-        }
-        if (Input.GetKeyUp(KeyCode.E))
-        {
-            SetTreeWithered(true);
-        }
+        //if (Input.GetKeyUp(KeyCode.K))
+        //{
+        //    SetTreeGrowing(true);
+        //}
+        //if (Input.GetKeyUp(KeyCode.E))
+        //{
+        //    SetTreeWithered(true);
+        //}
         //enemyPieces = GameObject.FindGameObjectsWithTag("EnemyPiece");
         //friendlyPieces = GameObject.FindGameObjectsWithTag("FriendlyPiece");
 

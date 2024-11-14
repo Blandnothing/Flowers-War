@@ -23,10 +23,10 @@ public class Suning : MonoBehaviour
     void Update()
     {
         //≤‚ ‘”√¿˝
-        if (Input.GetKeyUp(KeyCode.W))
-        {
-            bool SunUp = true;
-            TreeSun(SunUp);
-        }
+        //if (Input.GetKeyUp(KeyCode.W))
+        //{
+        //    bool SunUp = true;
+        //    TreeSun(SunUp);
+        //}
     }
 }
