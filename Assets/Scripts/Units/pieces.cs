@@ -10,8 +10,6 @@ public class pieces : MonoBehaviour
     public EMode mPiecesMode { get; protected set; }
     //棋子状态 默认为不消除 在满足条件时改为true，棋子被消除
     public bool isRemove = false;
-    //棋子特殊位置,不可消除与推动 默认为false 
-    public bool isCenter = false;
     //获取脚本所负载的棋子
     public GameObject pieceObj = null;
     // Start is called before the first frame update

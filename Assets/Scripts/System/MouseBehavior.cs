@@ -1,5 +1,5 @@
 
-//鼠标相关操作，决定棋子放置的位置以及种类
+//鼠标相关操作，决定棋子放置的位置以及种类 左键放下叶 右键放下茎 中键放下根
 //起名字是个体力活  2024/11/6
 
 using System;
@@ -26,27 +26,33 @@ public class MouseBehavior : MonoBehaviour
         {
             MouseDetect();
             GameManager.Instance.currentPiece = MouseInput();
+            if (GameManager.Instance.currentPiece != null && currentCell != null) {
+                GameManager.Instance.currentScript = currentCell;
+            }
         }
     }
     //决定鼠标的点击事件 左键是叶 右键是根 中键是茎
     private GameObject MouseInput()
     {
-        if (currentCell != null)
+        if (currentCell != null && currentCell.canDorp == true)
         {  
             if (Input.GetMouseButtonDown(0))
             {
                 currentCell.OnSelected3();
                 GameManager.Instance.gameStateChange(GameManager.EGameState.Clearing);
+                
             }
-            if (Input.GetMouseButtonDown(2))
+            else if (Input.GetMouseButtonDown(2))
             {
                 currentCell.OnSelected2();
                 GameManager.Instance.gameStateChange(GameManager.EGameState.Clearing);
+                
             }
-            if (Input.GetMouseButtonDown(1))
+            else if (Input.GetMouseButtonDown(1))
             {
                 currentCell.OnSelected1();
                 GameManager.Instance.gameStateChange(GameManager.EGameState.Clearing);
+               
             }
             return currentCell.thisPieces;
         }

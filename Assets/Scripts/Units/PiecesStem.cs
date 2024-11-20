@@ -27,7 +27,10 @@ public class PiecesStem : pieces
     {
         if (isRemove)
         {
-            print(mpiecesCamp);
+            GameObject.Destroy(this);
+            GameObject.Destroy(pieceObj);
+            GameManager.Instance.redStemExisting = false;
+            GameManager.Instance.redStemCool = 1;
         }
     }
 }

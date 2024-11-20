@@ -12,19 +12,22 @@ public class PiecesRoot : pieces
     }
     void Start()
     {
-       
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     public override void piecesRemove()
     {
         if (isRemove)
         {
-            print(mpiecesCamp);
+            GameObject.Destroy(this);
+            GameObject.Destroy(pieceObj);
+            GameManager.Instance.redRootExisting = false;
+            GameManager.Instance.redRootCool = 1;
         }
     }
 }

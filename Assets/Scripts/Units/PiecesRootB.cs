@@ -24,7 +24,10 @@ public class PiecesRootB : pieces
     {
         if (isRemove)
         {
-            print(mpiecesCamp);
+            GameObject.Destroy(this);
+            GameObject.Destroy(pieceObj);
+            GameManager.Instance.blueRootExisting = false;
+            GameManager.Instance.blueRootCool = 1;
         }
     }
 }

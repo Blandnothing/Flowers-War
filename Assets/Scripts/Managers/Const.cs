@@ -22,7 +22,7 @@ using UnityEngine;
     public GameObject preRootB;
     public GameObject preLeafB;
 
-    private void Start()
+    private void Awake()
     {
         Instance = this;
 
