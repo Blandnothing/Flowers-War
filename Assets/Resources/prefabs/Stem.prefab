@@ -99,7 +99,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isRemove: 0
-  isCenter: 0
   pieceObj: {fileID: 6348048102819844632}
 --- !u!65 &6464563467129331255
 BoxCollider:

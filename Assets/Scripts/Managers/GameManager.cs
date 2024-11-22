@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour
                 gameStateChange(EGameState.Thinking);
                     break;
             case EGameState.Ending:
-                print(loser);
+                print("Loser is "+loser);
                 break;
         }
     }

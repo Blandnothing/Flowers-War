@@ -15,8 +15,10 @@ public class CellBehavior : MonoBehaviour
     //该格子是否为核心区域以及为那个阵营的核心区域
     public GameManager.EGamePlayer cellCamp = GameManager.EGamePlayer.Cell;
     public bool coreCell = false;
+
     //预设的变量,三角形中心的偏移量
     Vector3 stemSub = new Vector3(0, 0.25f, 0);
+
     //格子的编号
     public int index = 0;
 
@@ -25,9 +27,9 @@ public class CellBehavior : MonoBehaviour
 
     //现在位于格子上的棋子
     public GameObject thisPieces = null;
-
     //棋子上挂载的脚本
     public pieces thisScript = null;
+
     //是否可以下棋
     public bool canDorp = false;
     #endregion
@@ -42,76 +44,71 @@ public class CellBehavior : MonoBehaviour
         
     }
 
-    #region 创建相应棋子的方法
+    #region 与鼠标点击生成相关方法
     //根
-    public void OnSelected1() {
+    public void OnSelected1()
+    {
         if (this.thisPieces == null)
-        {   if (GameManager.Instance.player == GameManager.EGamePlayer.Red && !GameManager.Instance.redRootExisting&&GameManager.Instance.redRootCool == 0)
+        {
+            if (GameManager.Instance.player == GameManager.EGamePlayer.Red && !GameManager.Instance.redRootExisting && GameManager.Instance.redRootCool == 0)
             {
-                thisPieces = Instantiate(Const.Instance.preRoot);
-                thisPieces.transform.position = this.transform.position;
+                CreatePiecesRedRoot();
                 if (GameManager.Instance.redStemCool > 0) { GameManager.Instance.redStemCool--; }
                 GameManager.Instance.redRootExisting = true;
-                thisScript = thisPieces.GetComponent<PiecesRoot>();
-
             }
-            else if(GameManager.Instance.player == GameManager.EGamePlayer.Blue&& !GameManager.Instance.blueRootExisting&&GameManager.Instance.blueRootCool == 0)
+            else if (GameManager.Instance.player == GameManager.EGamePlayer.Blue && !GameManager.Instance.blueRootExisting && GameManager.Instance.blueRootCool == 0)
             {
-                thisPieces = Instantiate(Const.Instance.preRootB);
-                thisPieces.transform.position = this.transform.position;
+                CreatePiecesBlueRoot();
                 if (GameManager.Instance.blueStemCool > 0) { GameManager.Instance.blueStemCool--; }
                 GameManager.Instance.blueRootExisting = true;
-                thisScript = thisPieces.GetComponent<PiecesRootB>();
             }
         }
-        else { 
-        
+        else
+        {
+
         }
-     
+
     }
     //茎
     public void OnSelected2()
     {
         if (this.thisPieces == null)
         {
-            if (GameManager.Instance.player == GameManager.EGamePlayer.Red && !GameManager.Instance.redStemExisting&&GameManager.Instance.redStemCool == 0)
+            if (GameManager.Instance.player == GameManager.EGamePlayer.Red && !GameManager.Instance.redStemExisting && GameManager.Instance.redStemCool == 0)
             {
-                thisPieces = Instantiate(Const.Instance.preStem);
-                thisPieces.transform.position = this.transform.position - stemSub;
+                CreatePiecesRedStem();
                 if (GameManager.Instance.redRootCool > 0) { GameManager.Instance.redRootCool--; }
                 GameManager.Instance.redStemExisting = true;
-                thisScript = thisPieces.GetComponent<PiecesStem>();
+
             }
-            else if (GameManager.Instance.player == GameManager.EGamePlayer.Blue && !GameManager.Instance.blueStemExisting&&GameManager.Instance.blueStemCool == 0) {
-                thisPieces = Instantiate(Const.Instance.preStemB);
-                thisPieces.transform.position = this.transform.position + stemSub;
+            else if (GameManager.Instance.player == GameManager.EGamePlayer.Blue && !GameManager.Instance.blueStemExisting && GameManager.Instance.blueStemCool == 0)
+            {
+                CreatePiecesBlueStem();
                 if (GameManager.Instance.blueRootCool > 0) { GameManager.Instance.blueRootCool--; }
                 GameManager.Instance.blueStemExisting = true;
-                thisScript = thisPieces.GetComponent<PiecesStemB>();
+
             }
         }
         else
         {
 
         }
-  
+
     }
     //叶
-    public void OnSelected3() {
+    public void OnSelected3()
+    {
         if (this.thisPieces == null)
         {
             if (GameManager.Instance.player == GameManager.EGamePlayer.Red)
             {
-                thisPieces = Instantiate(Const.Instance.preLeaf);
-                thisPieces.transform.position = this.transform.position;
-                thisScript = thisPieces.GetComponent<PiecesLeaf>();
+                CreatePiecesRed();
                 if (GameManager.Instance.redRootCool > 0) { GameManager.Instance.redRootCool--; }
                 if (GameManager.Instance.redStemCool > 0) { GameManager.Instance.redStemCool--; }
             }
-          else if(GameManager.Instance.player == GameManager.EGamePlayer.Blue) {
-                thisPieces = Instantiate(Const.Instance.preLeafB);
-                thisPieces.transform.position = this.transform.position;
-                thisScript = thisPieces.GetComponent<PiecesLeafB>();
+            else if (GameManager.Instance.player == GameManager.EGamePlayer.Blue)
+            {
+                CreatePiecesBlue();
                 if (GameManager.Instance.blueRootCool > 0) { GameManager.Instance.blueRootCool--; }
                 if (GameManager.Instance.blueStemCool > 0) { GameManager.Instance.blueStemCool--; }
             }
@@ -120,8 +117,11 @@ public class CellBehavior : MonoBehaviour
         {
 
         }
-       
+
     }
+    #endregion
+
+    #region 创建相应棋子的方法
     //叶red
     public void CreatePiecesRed() {
         thisPieces = Instantiate(Const.Instance.preLeaf);
@@ -133,6 +133,31 @@ public class CellBehavior : MonoBehaviour
         thisPieces = Instantiate(Const.Instance.preLeafB);
         thisPieces.transform.position = this.transform.position;
         thisScript = thisPieces.GetComponent<PiecesLeafB>();
+    }
+    //根red
+    public void CreatePiecesRedRoot() {
+        thisPieces = Instantiate(Const.Instance.preRoot);
+        thisPieces.transform.position = this.transform.position;
+        thisScript = thisPieces.GetComponent<PiecesRoot>();
+    }
+    
+    //根blue
+    public void CreatePiecesBlueRoot() {
+        thisPieces = Instantiate(Const.Instance.preRootB);
+        thisPieces.transform.position = this.transform.position;
+        thisScript = thisPieces.GetComponent<PiecesRootB>();
+    }
+    //茎red
+    public void CreatePiecesRedStem() {
+        thisPieces = Instantiate(Const.Instance.preStem);
+        thisPieces.transform.position = this.transform.position - stemSub;
+        thisScript = thisPieces.GetComponent<PiecesStem>();
+    }
+    //茎blue
+    public void CreatePiecesBlueStem() {
+        thisPieces = Instantiate(Const.Instance.preStemB);
+        thisPieces.transform.position = this.transform.position + stemSub;
+        thisScript = thisPieces.GetComponent<PiecesStemB>();
     }
     #endregion
 

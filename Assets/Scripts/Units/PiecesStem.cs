@@ -23,7 +23,7 @@ public class PiecesStem : pieces
     {
         
     }
-    public override void piecesRemove()
+    public override bool piecesRemove()
     {
         if (isRemove)
         {
@@ -31,6 +31,8 @@ public class PiecesStem : pieces
             GameObject.Destroy(pieceObj);
             GameManager.Instance.redStemExisting = false;
             GameManager.Instance.redStemCool = 1;
+            return true;
         }
+        return false;
     }
 }

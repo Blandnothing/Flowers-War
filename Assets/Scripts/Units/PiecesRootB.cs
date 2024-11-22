@@ -20,7 +20,7 @@ public class PiecesRootB : pieces
     {
         
     }
-    public override void piecesRemove()
+    public override bool piecesRemove()
     {
         if (isRemove)
         {
@@ -28,6 +28,8 @@ public class PiecesRootB : pieces
             GameObject.Destroy(pieceObj);
             GameManager.Instance.blueRootExisting = false;
             GameManager.Instance.blueRootCool = 1;
+            return true;
         }
+        return false;
     }
 }

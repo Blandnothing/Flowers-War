@@ -120,5 +120,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isRemove: 0
-  isCenter: 0
   pieceObj: {fileID: 271988759445463271}

@@ -23,7 +23,7 @@ public class pieces : MonoBehaviour
     {
         
     }
-    virtual public void piecesRemove() { }
+    virtual public bool piecesRemove() { return false; }
     public enum EMode
     {
         ROOT = 0,

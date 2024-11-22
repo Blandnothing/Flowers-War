@@ -749,6 +749,10 @@ MonoBehaviour:
   redStemExisting: 0
   blueRootExisting: 0
   blueStemExisting: 0
+  redRootCool: 0
+  blueRootCool: 0
+  redStemCool: 0
+  blueStemCool: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -72,7 +72,6 @@ public class MouseBehavior : MonoBehaviour
             if (cellBehavior != null)
             {
                 currentCell = cellBehavior;
-                //print(currentCell.name);
                 cellBehavior.PreSeleceted();
                 hasDetectCell = true;
 

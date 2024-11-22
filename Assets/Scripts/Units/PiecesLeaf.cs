@@ -20,12 +20,14 @@ public class PiecesLeaf : pieces
     {
         
     }
-    public override void piecesRemove()
+    public override bool piecesRemove()
     {
         if (isRemove)
         {
             GameObject.Destroy(this);
             GameObject.Destroy(pieceObj);
+            return true;
         }
+        return false;
     }
 }

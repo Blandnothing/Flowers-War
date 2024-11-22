@@ -97,7 +97,7 @@ public class BoardBehavior : MonoBehaviour
                     last = current - 1;
                     next = current + 1;
                     if (CellBehaviors[last]?.thisScript?.mpiecesCamp == CellBehaviors[current].thisScript.mpiecesCamp && CellBehaviors[next]?.thisScript?.mpiecesCamp == CellBehaviors[current].thisScript.mpiecesCamp) {
-                            CellBehaviors[last].thisScript.isRemove = true;
+                        CellBehaviors[last].thisScript.isRemove = true;
                         CellBehaviors[current].thisScript.isRemove = true;
                         CellBehaviors[next].thisScript.isRemove = true;
                     }
@@ -116,8 +116,6 @@ public class BoardBehavior : MonoBehaviour
                 current = r * 8 + c;
                 if (CellBehaviors[current].thisScript != null)
                 {   
-                    //if ( r > 0) { last = current - 1; }
-                    //if ( r < 7) { next = current + 1; }
                     last = current - 8;
                     next = current + 8;
                     if (CellBehaviors[last]?.thisScript?.mpiecesCamp == CellBehaviors[current].thisScript.mpiecesCamp && CellBehaviors[next]?.thisScript?.mpiecesCamp == CellBehaviors[current].thisScript.mpiecesCamp)
@@ -125,7 +123,6 @@ public class BoardBehavior : MonoBehaviour
                         CellBehaviors[last].thisScript.isRemove =true;
                         CellBehaviors[current].thisScript.isRemove = true;
                         CellBehaviors[next].thisScript.isRemove = true;
-                        print("确实是棋子消除");
                     }
 
                 }
@@ -135,11 +132,11 @@ public class BoardBehavior : MonoBehaviour
     }
     void ClearCell() {
         foreach (CellBehavior cell in CellBehaviors) {
-            cell?.thisScript?.piecesRemove();
-            if (cell?.thisScript?.isRemove == true) { 
-            cell.thisScript = null;
-            cell.thisPieces = null;
-            }
+            if (cell.thisScript == null) { continue; }
+           if (cell.thisScript.piecesRemove()) { 
+           cell.thisScript = null;
+           cell.thisPieces = null;
+           }
         }
     }
     public void IntegrationClearingCell()
@@ -154,15 +151,17 @@ public class BoardBehavior : MonoBehaviour
     void PushcolCellUp() {
         if ( GameManager.Instance.currentScript != null) {
             int cellNumber = 0;
+            //检测是从里所下棋子最近的格子往外检测
             for (int i = GameManager.Instance.currentScript.index + 8; i <= GameManager.Instance.currentScript.index + 8 * 3; i += 8) {
-                if (i >= 64) { continue; }
-                if (CellBehaviors[i].thisScript == null) { break; }
-                if (i >= 56) { return; }
-                if (CellBehaviors[i + 8].coreCell == true && CellBehaviors[i + 8].cellCamp != GameManager.Instance.player) { return; }
-                if (CellBehaviors[i].thisScript?.mPiecesMode == pieces.EMode.ROOT) { return; }
-                if (CellBehaviors[i].thisScript?.mpiecesCamp == CellBehaviors[GameManager.Instance.currentScript.index].thisScript?.mpiecesCamp) { return; }
+                if (i >= 64) { continue; } //超出格子范围
+                if (CellBehaviors[i].thisScript == null) { break; } //当前格子为空
+                if (i >= 56) { return; } //有棋子紧挨边界
+                if (CellBehaviors[i + 8].coreCell == true && CellBehaviors[i + 8].cellCamp != GameManager.Instance.player) { return; } //无法推棋子进入别人的核心区
+                if (CellBehaviors[i].thisScript?.mPiecesMode == pieces.EMode.ROOT) { return; } //有根在推动方向
+                if (CellBehaviors[i].thisScript?.mpiecesCamp == CellBehaviors[GameManager.Instance.currentScript.index].thisScript?.mpiecesCamp) { return; }//推动方向有己方棋子
                 cellNumber++;
             }
+            //推动时从最外面一个的下一格开始移动棋子
             for (int i = GameManager.Instance.currentScript.index + cellNumber * 8; i >= GameManager.Instance.currentScript.index + 8; i -= 8) {
                 if (CellBehaviors[i].thisPieces != null)
                 {
