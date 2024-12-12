@@ -39,6 +39,6 @@ public class CameraController : MonoBehaviour
         cameraTransform.rotation = targetRotation;
 
         // 加载下一个场景
-        SceneManager.LoadScene("dating");
+        SceneManager.LoadScene("On-line lobby");
     }
 }
